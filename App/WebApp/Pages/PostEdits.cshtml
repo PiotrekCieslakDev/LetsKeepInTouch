@@ -1,0 +1,64 @@
+﻿@page
+@model WebApp.Pages.PostEditsModel
+@{
+}
+
+<div class="container">
+
+    <div class="text-center">
+        <h3>Post's edits</h3>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="text-muted">
+                        <a asp-page="/ClientsProfile" asp-route-id="@Model.CurrentPost.Author.Id">@Model.CurrentPost.Author.GetFullNameWithUserName()</a>
+                    </h6>
+                </div>
+                <p class="card-text">
+                    This user is @Model.CurrentPost.Author.UserRole user
+                </p>
+
+                @foreach (var postContent in Model.CurrentPost.PostContents)
+                {
+                    <hr />
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6>
+                        </h6>
+                        <h6>
+                            @postContent.CreationTime
+                        </h6>
+                    </div>
+                    <h5 class="card-title">
+                        @postContent.ContentText
+                    </h5>
+                }
+                <br />
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <a class="btn btn-success" asp-page="/AddComment" asp-route-id="@Model.CurrentPost.Id">Add a comment</a>
+        @if (Model._LoggedInUser != null)
+        {
+            @if (Model._LoggedInUser.Id == Model.CurrentPost.Author.Id)
+            {
+                <div class="d-flex justify-content-between align-items-center">
+                    <a class="btn btn-primary" asp-page="/EditPost" asp-route-id="@Model.CurrentPost.Id">Edit</a>
+                    <a class="btn btn-danger" asp-page="/DeletePost" asp-route-id="@Model.CurrentPost.Id">Delete</a>
+                </div>
+            }
+            else
+            {
+                <div class="ml-auto">
+                    <a class="btn btn-danger" asp-page="/ReportPost" asp-route-id="@Model.CurrentPost.Id">Report Post</a>
+                </div>
+            }
+        }
+    </div>
+
+</div>

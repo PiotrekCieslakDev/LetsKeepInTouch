@@ -1,0 +1,137 @@
+﻿@page
+@model WebApp.Pages.MainPostWithCommentsModel
+@{
+    ViewData["Title"] = "MainPost page";
+}
+
+<div class="container">
+    <div class="text-center">
+        <h1>@Model.MainPost.Author.GetFullNameWithUserNameAndEmail()'s post</h1>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="text-muted">
+                        <a asp-page="/ClientsProfile" asp-route-id="@Model.MainPost.Author.Id">
+                            @Model.MainPost.Author.GetFullNameWithUserNameAndEmail()
+                        </a>
+                    </h6>
+                    <small class="text-muted">
+                        @Model.MainPost.GetFirstPostDate()
+                    </small>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="card-text">
+                        This user is @Model.MainPost.Author.UserRole user
+                    </p>
+                    <a asp-page="/PostEdits" asp-route-id="@Model.MainPost.Id">
+                        <small class="text-muted">
+                            This post was edited: @Model.MainPost.GetNumberOfEdits() times
+                        </small>
+                    </a>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">
+                        @Model.MainPost.GetLatestPostContent().ContentText
+                    </h5>
+                </div>
+                <br />
+                <div class="d-flex justify-content-between align-items-center">
+                    @if (Model._LoggedInUser == null)
+                    {
+                        <a class="btn btn-success" asp-page="/AddComment" asp-route-id="@Model.MainPost.Id">Add a comment</a>
+                    }
+                    else if (Model._LoggedInUser.Id == Model.MainPost.Author.Id)
+                    {
+                        <a class="btn btn-primary" asp-page="/UpdatePost" asp-route-id="@Model.MainPost.Id">Edit</a>
+                        <a class="btn btn-danger" asp-page="/DeletePost" asp-route-id="@Model.MainPost.Id">Delete</a>
+                    }
+                    else
+                    {
+                        <div class="ml-auto">
+                            <a class="btn btn-danger" asp-page="/ReportPost" asp-route-id="@Model.MainPost.Id">Report Post</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        @if (Model._LoggedInUser != null)
+        {
+            <div class="card mb-4 shadow-sm" style="max-width: 80%; margin-left: auto; margin-right: auto;">
+                <div class="card-body">
+                    <h5>Add a Comment</h5>
+                    <hr>
+                    <form method="post">
+                        <div class="form-group">
+                            <label class="form-label" asp-for="NewCommentDTO.Content">Username</label><br />
+                            <input class="form-control" type="text" asp-for="NewCommentDTO.Content" rows="3" placeholder="Enter your comment">
+                            <span asp-validation-for="NewCommentDTO.Content" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        <div class="text-center">
+            <h3>Comments:</h3>
+        </div>
+
+        @foreach (var comment in @Model.MainPost.Comments)
+        {
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="text-muted">
+                            <a asp-page="/ClientsProfile" asp-route-id="@Model.MainPost.Author.Id">
+                                @comment.Author.GetFullNameWithUserNameAndEmail()
+                            </a>
+                        </h6>
+                        <small class="text-muted">
+                            @comment.GetFirstPostDate()
+                        </small>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="card-text">
+                            This user is @comment.Author.UserRole user
+                        </p>
+                        <a asp-page="/PostEdits" asp-route-id="@comment.Id">
+                            <small class="text-muted">
+                                This post was edited: @comment.GetNumberOfEdits() times
+                            </small>
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">
+                            @comment.GetLatestPostContent().ContentText
+                        </h5>
+                    </div>
+                    <br />
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        @if (Model._LoggedInUser != null && Model._LoggedInUser.Id == comment.Author.Id)
+                        {
+                            <div class="ml-auto">
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" asp-page="/EditPost" asp-route-id="@comment.Id">Edit</a>
+                                    <a class="btn btn-danger" asp-page="/DeletePost" asp-route-id="@comment.Id">Delete</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <a class="btn btn-danger" asp-page="/ReportPost" asp-route-id="@comment.Id">Report Comment</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

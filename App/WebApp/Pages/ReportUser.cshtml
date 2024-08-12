@@ -1,0 +1,27 @@
+﻿@page
+@model WebApp.Pages.ReportUserModel
+@{
+    ViewData["Title"] = "Report a user";
+}
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <h3 class="mb-5">Are you sure you want to report @Model._SelectedUser.GetFullNameWithUserName()?</h3>
+
+                        <form method="post">
+
+                            <button class="btn btn-danger btn-lg btn-block" type="submit">Yes, file a report</button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

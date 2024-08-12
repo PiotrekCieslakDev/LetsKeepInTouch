@@ -1,0 +1,28 @@
+﻿@page
+@model WebApp.Pages.CreatePostModel
+@{
+    ViewData["Title"] = "Create a new main post";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>Create post</h1>
+            <form method="post" asp-page-handler="OnPost">
+                <div class="form-group">
+                    <label asp-for="_NewPost.Content">Text<small>*</small></label>
+                    <textarea asp-for="_NewPost.Content" rows="5" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <p><span class="require">*</span> - required fields</p>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <a asp-page="/Index" class="btn btn-default">Cancel</a>
+                </div>
+                @Model._LoggedInUser.GetFullNameWithUserNameAndEmail()
+            </form>
+        </div>
+    </div>
+</div>

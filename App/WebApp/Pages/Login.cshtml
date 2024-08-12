@@ -1,0 +1,53 @@
+﻿@page
+@model WebApp.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <h3 class="mb-5">Sign in</h3>
+
+                        <form method="post">
+                            <div class="form-outline mb-4">
+                                <label class="form-label" asp-for="LoginDTO.UserName">Username</label><br />
+                                <input class="form-control" type="text" asp-for="LoginDTO.UserName" />
+                                <span asp-validation-for="LoginDTO.UserName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" asp-for="LoginDTO.Password">Password</label><br />
+                                <input class="form-control" type="password" asp-for="LoginDTO.Password" />
+                                <span asp-validation-for="LoginDTO.Password" class="text-danger"></span>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+
+                            <p class="text-center text-muted mt-5 mb-0">
+                                Don't have an account? <a asp-area="" asp-page="/Register" class="fw-bold text-body"><u>Register here</u></a>
+                            </p>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@if (Model.ResultMessage != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@Model.ResultMessage");
+        };
+    </script>
+}

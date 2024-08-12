@@ -1,0 +1,146 @@
+﻿@page
+@model WebApp.Pages.UserProfileModel
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <span> </span>
+            </div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile info</h4>
+                    <div class="text-center">
+                        <a class="btn btn-danger" asp-page="/ReportUser" asp-route-id="@Model._SelectedUser.Id">Report this user</a>
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                <p1 class="form-label" >Firstname:</p1>
+                <p1 class="form-label" >@Model._SelectedUser.FirstName</p1><br />
+                </div>
+
+                <div class="form-outline mb-4">
+                    <p1 class="form-label">LastName:</p1>
+                    <p1 class="form-label">@Model._SelectedUser.LastName</p1><br />
+                </div>
+
+                <div class="form-outline mb-4">
+                    <p1 class="form-label">UserName:</p1>
+                    <p1 class="form-label">@Model._SelectedUser.UserName</p1><br />
+                </div>
+
+                <div class="form-outline mb-4">
+                    <p1 class="form-label">Email:</p1>
+                    <p1 class="form-label">@Model._SelectedUser.Email</p1><br />
+                </div>
+
+                @* <div class="form-outline mb-4">
+                <label class="form-label" asp-for="UpdateUserDTO.LastName">Lastname:*</label><br />
+                <input class="form-control" type="text" asp-for="UpdateUserDTO.LastName" value="@Model.UpdateUserDTO.LastName" />
+                <span asp-validation-for="UpdateUserDTO.LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-outline mb-4">
+                <label class="form-label" asp-for="UpdateUserDTO.UserName">Username:*</label><br />
+                <input class="form-control" type="text" asp-for="UpdateUserDTO.UserName" value="@Model.UpdateUserDTO.UserName" />
+                <span asp-validation-for="UpdateUserDTO.UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-outline mb-4">
+                <label class="form-label" asp-for="UpdateUserDTO.Email">Email:*</label><br />
+                <input class="form-control" type="text" asp-for="UpdateUserDTO.Email" value="@Model.UpdateUserDTO.Email" />
+                <span asp-validation-for="UpdateUserDTO.Email" class="text-danger"></span>
+                </div> *@
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            @foreach (var post in Model._SelectedUsersPosts)
+            {
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6 class="text-muted">
+                                <a asp-page="/ClientsProfile" asp-route-id="@post.Author.Id">@post.Author.GetFullNameWithUserName()</a>
+                            </h6>
+                            <small class="text-muted">
+                                @post.GetFirstPostDate()
+                            </small>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="card-text">
+                                This user is @post.Author.UserRole user
+                            </p>
+                            <a asp-page="/PostEdits" asp-route-id="@post.Id">
+                                <small class="text-muted">
+                                    This post was edited: @post.GetNumberOfEdits() times
+                                </small>
+                            </a>
+                        </div>
+                        <h5 class="card-title">
+                            @post.GetLatestPostContent().ContentText
+                        </h5>
+                        <br />
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a class="btn btn-primary" asp-page="/MainPostPage" asp-route-id="@post.Id">See comments</a>
+                            @if (Model._LoggedInUser != null)
+                            {
+                                @if (Model._LoggedInUser.Id == post.Author.Id)
+                                {
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a class="btn btn-primary" asp-page="/EditPost" asp-route-id="@post.Id">Edit</a>
+                                        <a class="btn btn-danger" asp-page="/DeletePost" asp-route-id="@post.Id">Delete</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="ml-auto">
+                                        <a class="btn btn-danger" asp-page="/ReportPost" asp-route-id="@post.Id">Report Post</a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    @if (Model.PageNumber > 1)
+                    {
+                        <li class="page-item"><a class="page-link" asp-page-handler="OnGet" asp-route-pageNumber="1">First</a></li>
+                        <li class="page-item"><a class="page-link" asp-page-handler="OnGet" asp-route-pageNumber="@(Model.PageNumber - 1)">Previous</a></li>
+                    }
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(Model.PageNumber == i ? "active" : "")"><a class="page-link" asp-page-handler="OnGet" asp-route-pageNumber="@i">@i</a></li>
+                    }
+                    @if (Model.PageNumber < Model.TotalPages)
+                    {
+                        <li class="page-item"><a class="page-link" asp-page-handler="OnGet" asp-route-pageNumber="@(Model.PageNumber + 1)">Next</a></li>
+                        <li class="page-item"><a class="page-link" asp-page-handler="OnGet" asp-route-pageNumber="@Model.TotalPages">Last</a></li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.ResultMessage != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@Model.ResultMessage");
+        };
+    </script>
+}

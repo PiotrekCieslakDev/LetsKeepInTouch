@@ -1,0 +1,1574 @@
+<Project>
+  <Name>Lets keep in touch</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.ClassDiagram" assembly="NClass.DiagramEditor, Version=2.8.0.1, Culture=neutral, PublicKeyToken=null">
+    <Name>UML current</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>User</Name>
+        <Access>Public</Access>
+        <Location left="2147" top="1451" />
+        <Size width="683" height="723" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid id</Member>
+        <Member type="Field">private string firstname</Member>
+        <Member type="Field">private string lastname</Member>
+        <Member type="Field">private string username</Member>
+        <Member type="Field">private string email</Member>
+        <Member type="Field">private byte[] passwordHash</Member>
+        <Member type="Field">private byte[] passwordSalt</Member>
+        <Member type="Field">private UserRole userRole</Member>
+        <Member type="Field">private bool deactivated</Member>
+        <Member type="Field">private bool ban</Member>
+        <Member type="Constructor">public User(string firstName, string lastName, string username, string email, string password, UserRole userRole)</Member>
+        <Member type="Constructor">public User(Guid id, string firstName, string lastName, string username, string email, byte[] passwordHash, byte[] password, bool ban)</Member>
+        <Member type="Property">public Guid Id { get; }</Member>
+        <Member type="Property">public string FirstName { get; }</Member>
+        <Member type="Property">public string LastName { get; }</Member>
+        <Member type="Property">public string UserName { get; }</Member>
+        <Member type="Property">public string Email { get; }</Member>
+        <Member type="Property">public byte[] PasswordHash { get; }</Member>
+        <Member type="Property">public byte[] PasswordSalt { get; }</Member>
+        <Member type="Property">public UserRole UserRole { get; }</Member>
+        <Member type="Property">public bool Deactivated { get; }</Member>
+        <Member type="Property">public int NewProperty { get; set; }</Member>
+        <Member type="Method">public Result ToggleBan()</Member>
+        <Member type="Method">public void UpdateUserWithoutPassword(string username, string email, string firstname, string lastname, UserRole userRole, bool ban, bool deactivated)</Member>
+        <Member type="Method">Result ChangePasswordByItsUser(string password, Guid userId)</Member>
+        <Member type="Method">Result ChangePasswordByAdmin(string password, bool userIsAdmin)</Member>
+        <Member type="Method">public bool IsAdmin()</Member>
+        <Member type="Method">public Result BanUser(bool banUser)</Member>
+        <Member type="Method">public Result UnbanUser()</Member>
+        <Member type="Method">public Result ToggleUserBan(bool ban)</Member>
+        <Member type="Method">public string GetFullName()</Member>
+        <Member type="Method">public string GetFullNameWithUsername()</Member>
+        <Member type="Method">public string GetFullNameWithUsernameAndEmail()</Member>
+        <Member type="Method">private byte[] GenerateSalt()</Member>
+        <Member type="Method">private void SetPassword(string password)</Member>
+        <Member type="Method">public bool VerifyPassword(string password)</Member>
+        <Member type="Method">public Result VerifiyUser()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Post</Name>
+        <Access>Public</Access>
+        <Location left="1203" top="1451" />
+        <Size width="482" height="519" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid id</Member>
+        <Member type="Field">private User author</Member>
+        <Member type="Field">private List&lt;PostContent&gt; postContents</Member>
+        <Member type="Field">List&lt;Post&gt; comments</Member>
+        <Member type="Field">List&lt;Like&gt; likes</Member>
+        <Member type="Field">private bool restricted</Member>
+        <Member type="Field">private bool deleted</Member>
+        <Member type="Constructor">public Post(User author, string content)</Member>
+        <Member type="Constructor">public Post(Guid id, User author, List&lt;PostContent&gt; postContents, bool restricted, bool deleted)</Member>
+        <Member type="Constructor">public Post(Guid id, User author, List&lt;PostContent&gt; postContents, bool restricted, bool deleted)</Member>
+        <Member type="Property">public guid Id { get; }</Member>
+        <Member type="Property">public List&lt;PostConent&gt; PostContents { get; }</Member>
+        <Member type="Property">public User Author { get; }</Member>
+        <Member type="Property">public List&lt;Comment&gt; Comments { get; }</Member>
+        <Member type="Property">public bool Deleted { get; }</Member>
+        <Member type="Property">public bool Restricted { get; }</Member>
+        <Member type="Method">public DateTime GetLatestPostsDate()</Member>
+        <Member type="Method">public int CountAllPostsContents()</Member>
+        <Member type="Method">public PostContent GetLatestPostContent()</Member>
+        <Member type="Method">public Result TogglePostRestriction(bool restriction)</Member>
+        <Member type="Method">public bool EditPost(User editor, string content)</Member>
+        <Member type="Method">public Result DeletePost(Guid authorId)</Member>
+        <Member type="Method">public Result AddComment(Post comment)</Member>
+        <Member type="Method">public bool IsLikedByUser(User user)</Member>
+        <Member type="Method">public Result ToggleLike(User likingUser)</Member>
+        <Member type="Method">public Result RestrictPost(bool restrict)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PostContent</Name>
+        <Access>Public</Access>
+        <Location left="1203" top="2059" />
+        <Size width="482" height="213" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid id</Member>
+        <Member type="Field">private string content</Member>
+        <Member type="Field">private DateTime creationTime</Member>
+        <Member type="Constructor">public PostContent(string contentText, DateTime creationTime)</Member>
+        <Member type="Constructor">public PostContent(Guid id, string contentText, DateTime creationTime)</Member>
+        <Member type="Property">public Guid Id { get; }</Member>
+        <Member type="Property">public string ContentText { get; }</Member>
+        <Member type="Property">public DateTime CreationTime { get; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Result</Name>
+        <Access>Public</Access>
+        <Location left="3800" top="628" />
+        <Size width="162" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly bool success</Member>
+        <Member type="Field">private readonly string message</Member>
+        <Member type="Property">public bool Success { get; }</Member>
+        <Member type="Property">public string Message { get; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Report</Name>
+        <Access>Public</Access>
+        <Location left="1872" top="828" />
+        <Size width="226" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Guid id</Member>
+        <Member type="Field">User reporter</Member>
+        <Member type="Field">DateTime timeStampOfReport</Member>
+        <Member type="Field">bool reviewed</Member>
+        <Member type="Property">public Guid id { get; }</Member>
+        <Member type="Property">public User reporter { get; }</Member>
+        <Member type="Property">public int NewProperty { get; set; }</Member>
+        <Member type="Property">public DateTime TimeStamp { get; }</Member>
+        <Member type="Property">public bool Reviewed { get; }</Member>
+        <Member type="Method">public abstract Result Review()</Member>
+        <Member type="Method">public virtual string GetInfo()</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PostReport</Name>
+        <Access>Public</Access>
+        <Location left="1523" top="1170" />
+        <Size width="248" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Post reportedPost</Member>
+        <Member type="Property">public Post ReportedPost { get; }</Member>
+        <Member type="Method">public override Result Review(bool restrict, bool banUser)</Member>
+        <Member type="Method">public override string GetInfo()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserReport</Name>
+        <Access>Public</Access>
+        <Location left="2133" top="1170" />
+        <Size width="180" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">User reportedUser</Member>
+        <Member type="Property">public User ReportedUser { get; }</Member>
+        <Member type="Method">public override Result Review(bool banUser)</Member>
+        <Member type="Method">public override string GetInfo()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Like</Name>
+        <Access>Public</Access>
+        <Location left="886" top="1371" />
+        <Size width="162" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Guid id</Member>
+        <Member type="Field">User likingUser</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>UserRole</Name>
+        <Access>Public</Access>
+        <Location left="1920" top="1660" />
+        <Size width="163" height="112" />
+        <Collapsed>False</Collapsed>
+        <Value>Admin</Value>
+        <Value>Regular</Value>
+        <Value>Verified</Value>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IUserService</Name>
+        <Access>Public</Access>
+        <Location left="2389" top="508" />
+        <Size width="477" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">List&lt;User&gt; GetAllUsers()</Member>
+        <Member type="Method">List&lt;User&gt; GetAllUsersOfUserRole(UserRole userRole)</Member>
+        <Member type="Method">User? GetUserById(Guid userId)</Member>
+        <Member type="Method">Result CreateUser(User newUser)</Member>
+        <Member type="Method">Result UpdateUser(User user)</Member>
+        <Member type="Method">Result DeleteUser(Guid userId)</Member>
+        <Member type="Method">List&lt;User&gt; SearchUserByFullNameAndUsername(string searchTerm, UserRole? userRole)</Member>
+        <Member type="Method">List&lt;User&gt; GetUsersByRoles(List&lt;UserRole&gt; roles)</Member>
+        <Member type="Method">Result ToggleUserBan(Guid userId, bool ban)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserService</Name>
+        <Access>Public</Access>
+        <Location left="2389" top="800" />
+        <Size width="478" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private List&lt;User&gt; users</Member>
+        <Member type="Field">private IUserRepository userRepository</Member>
+        <Member type="Constructor">public UserService()</Member>
+        <Member type="Constructor">public UserService(IUserRepository userRepository)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IReportService</Name>
+        <Access>Public</Access>
+        <Location left="1691" top="238" />
+        <Size width="602" height="180" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Result CreateUserReport(Guid reporterId, Guid reportedUserId)</Member>
+        <Member type="Method">Result DeleteReport(Guid reportId)</Member>
+        <Member type="Method">Report GetReportById(Guid reportId)</Member>
+        <Member type="Method">List&lt;Report&gt; GetAllReports()</Member>
+        <Member type="Method">List&lt;Report&gt; GetAllUserReports(Guid userId)</Member>
+        <Member type="Method">Result ReviewPostReport(Guid reportId, bool restrictPost)</Member>
+        <Member type="Method">Result ReviewUserReport(Guid reportId, bool banUser, bool restrictAllOfTheirPosts)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>ReportService</Name>
+        <Access>Public</Access>
+        <Location left="1691" top="471" />
+        <Size width="602" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private List&lt;Report&gt; reports</Member>
+        <Member type="Field">private IReportRepository reportRepository</Member>
+        <Member type="Field">private PostService postService</Member>
+        <Member type="Field">private UserService userService</Member>
+        <Member type="Constructor">public ReportService()</Member>
+        <Member type="Constructor">public ReportService(IReportRepository reportRepository, IPostRepository postrepository, IUserRepository userRepository)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IPostService</Name>
+        <Access>Public</Access>
+        <Location left="993" top="320" />
+        <Size width="425" height="248" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">List&lt;Post&gt; GetAllPosts()</Member>
+        <Member type="Method">List&lt;Post&gt; GetAllPostByLatest()</Member>
+        <Member type="Method">Post? GetPostById(Guid postId)</Member>
+        <Member type="Method">List&lt;Post&gt; GetMainPostsByAuthorId(Guid userId)</Member>
+        <Member type="Method">Result CreatePost(Post post)</Member>
+        <Member type="Method">Result MakePostEdit(User author, Guid postId, string content)</Member>
+        <Member type="Method">Result DeletePostAsUser(Guid authorId, Guid postId)</Member>
+        <Member type="Method">Result DeletePostAtAll(Guid postId)</Member>
+        <Member type="Method">Result CreatingCommentOnAPost(Post newComment, Guid commentedPostId)</Member>
+        <Member type="Method">Result TogglePostRestriction(Guid postId, bool restriction)</Member>
+        <Member type="Method">Result TogglePostLike(Guid authorId, Guid postId)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>PostService</Name>
+        <Access>Public</Access>
+        <Location left="993" top="654" />
+        <Size width="425" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private List&lt;Post&gt; _posts</Member>
+        <Member type="Field">private readonly UserService _userService</Member>
+        <Member type="Field">private readonly NotificationService _notificationService</Member>
+        <Member type="Field">private readonly IPostRepository _postRepository</Member>
+        <Member type="Constructor">public PostService()</Member>
+        <Member type="Constructor">public PostService(IPostRepository postRepository, IUserRepository userRepository, INotificationRepository notificationRepository)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>VerificationApplication</Name>
+        <Access>Public</Access>
+        <Location left="3159" top="1575" />
+        <Size width="185" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Guid id</Member>
+        <Member type="Field">User userToBeVerifiedId</Member>
+        <Member type="Field">private string verificationJustification</Member>
+        <Member type="Field">DateTime timeStamp</Member>
+        <Member type="Field">bool reviewed</Member>
+        <Member type="Property">public Guid id { get; }</Member>
+        <Member type="Property">public User UserToBeVerified { get; }</Member>
+        <Member type="Property">public DateTime TimeStamp { get; }</Member>
+        <Member type="Property">public bool Reviewed { get; }</Member>
+        <Member type="Method">public Result ReviewApplication(bool grantVerification)</Member>
+        <Member type="Method">public string GetInfo()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IVerificationService</Name>
+        <Access>Public</Access>
+        <Location left="3002" top="915" />
+        <Size width="510" height="163" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Result CreateVerificationApplication(User userToBeVerified, string justification)</Member>
+        <Member type="Method">VerificationApplication GetVerificationApplicationById(Guid verificationApplicationId)</Member>
+        <Member type="Method">List&lt;VerificationApplication&gt; GetAllVerificationApplications()</Member>
+        <Member type="Method">Result DeleteVerificationApplication(Guid verificationApplicationId)</Member>
+        <Member type="Method">Result ReviewVerificationApplication(Guid verificationApplicationId, bool verifcationGranted)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>VerificationService</Name>
+        <Access>Public</Access>
+        <Location left="3002" top="1174" />
+        <Size width="510" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private IVerificationRepository verifiactionRepository</Member>
+        <Member type="Field">private UserService userService</Member>
+        <Member type="Constructor">public VerificationService()</Member>
+        <Member type="Constructor">public VerificationService(IUserRepository userRepository, IVerificationRepository verificationRepository)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>Result helping class
+</Text>
+        <Location left="3600" top="647" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Package">
+        <Name>MessagingFeature</Name>
+        <Location left="3599" top="934" />
+        <Size width="843" height="919" />
+      </Entity>
+      <Entity type="Interface">
+        <Name>IChatService</Name>
+        <Access>Public</Access>
+        <Location left="3694" top="1038" />
+        <Size width="162" height="61" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Class">
+        <Name>Conversation</Name>
+        <Access>Public</Access>
+        <Location left="3694" top="1462" />
+        <Size width="162" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid id</Member>
+        <Member type="Field">private List&lt;User&gt; users</Member>
+        <Member type="Field">private List&lt;Message&gt; messages</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ChatService</Name>
+        <Access>Public</Access>
+        <Location left="3694" top="1230" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>GroupConversation</Name>
+        <Access>Public</Access>
+        <Location left="3923" top="1630" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private string conversationName</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Message</Name>
+        <Access>Public</Access>
+        <Location left="4221" top="1422" />
+        <Size width="162" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Guid id</Member>
+        <Member type="Field">User sender</Member>
+        <Member type="Field">string content</Member>
+        <Member type="Field">DateTime timeStamp</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>This feature is to determine later
+</Text>
+        <Location left="4086" top="1088" />
+        <Size width="225" height="75" />
+      </Entity>
+      <Entity type="Class">
+        <Name>ContactUsForm</Name>
+        <Access>Public</Access>
+        <Location left="416" top="1268" />
+        <Size width="162" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Guid id</Member>
+        <Member type="Field">string textContent</Member>
+        <Member type="Field">DateTime timeStamp</Member>
+        <Member type="Field">bool seen</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ContactUsFormByUser</Name>
+        <Access>Public</Access>
+        <Location left="594" top="1544" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">User userSender</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ContactUsFormByNonUser</Name>
+        <Access>Public</Access>
+        <Location left="196" top="1544" />
+        <Size width="202" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">string email</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>MainPost</Name>
+        <Access>Public</Access>
+        <Location left="742" top="1893" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Comment</Name>
+        <Access>Public</Access>
+        <Location left="932" top="1893" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Containers>
+      <Container entityIndex="19">
+        <ChildEntity>24</ChildEntity>
+        <ChildEntity>23</ChildEntity>
+        <ChildEntity>22</ChildEntity>
+        <ChildEntity>21</ChildEntity>
+        <ChildEntity>20</ChildEntity>
+        <ChildEntity>25</ChildEntity>
+      </Container>
+    </Containers>
+    <Relationships>
+      <Relationship type="Generalization" first="5" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="6" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="1" second="2">
+        <Label>has</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1417</X>
+          <Y>1998</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <EndMultiplicity>1..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="1" second="1">
+        <Label>has comments</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1713</X>
+          <Y>1610</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1550</X>
+          <Y>1999</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="5" second="1">
+        <Label>reported post</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="6" second="0">
+        <Label>reported user</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="8">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2117</X>
+          <Y>1709</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="1" second="7">
+        <Label>has</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Realization" first="10" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="10" second="0">
+        <Label>manages</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="1" second="0">
+        <Label>is created by</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1710</X>
+          <Y>1562</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+      </Relationship>
+      <Relationship type="Realization" first="12" second="11">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="12" second="4">
+        <Label>manages</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2000</X>
+          <Y>687</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Realization" first="14" second="13">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="14" second="1">
+        <Label>manages</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1335</X>
+          <Y>866</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1335</X>
+          <Y>1426</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="14" second="7">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1086</X>
+          <Y>858</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="15" second="0">
+        <Label>user applies for be verified</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Realization" first="17" second="16">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="17" second="15">
+        <Label>manages</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="17" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>3094</X>
+          <Y>1346</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2767</X>
+          <Y>1414</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2195</X>
+          <Y>684</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2416</X>
+          <Y>1423</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1735</X>
+          <Y>675</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="21" second="24">
+        <Label>contains</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Realization" first="22" second="20">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="22" second="21">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="23" second="21">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>3898</X>
+          <Y>1676</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>3782</X>
+          <Y>1652</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="23" second="24">
+        <Label>contains</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="21" second="0">
+        <Label>chats have two or more members. User doesnt have to has any chats</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>2..*</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="14" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1157</X>
+          <Y>2170</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="27" second="26">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="28" second="26">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="27" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>690</X>
+          <Y>1693</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2323</X>
+          <Y>2296</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="14" second="10">
+        <Label>uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>2398</X>
+          <Y>758</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="17" second="10">
+        <Label>uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2976</X>
+          <Y>1223</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2771</X>
+          <Y>973</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="14">
+        <Label>uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="30" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1177</X>
+          <Y>1855</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="29" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>850</X>
+          <Y>1845</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1178</X>
+          <Y>1810</Y>
+        </BendPoint>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.ClassDiagram" assembly="NClass.DiagramEditor, Version=2.8.0.1, Culture=neutral, PublicKeyToken=null">
+    <Name>UML for next sprints</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>GroupConversation</Name>
+        <Access>Public</Access>
+        <Location left="3203" top="1267" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private string conversationName</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Message</Name>
+        <Access>Public</Access>
+        <Location left="3435" top="1099" />
+        <Size width="162" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Guid id</Member>
+        <Member type="Field">User sender</Member>
+        <Member type="Field">string content</Member>
+        <Member type="Field">DateTime timeStamp</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ChatService</Name>
+        <Access>Public</Access>
+        <Location left="2974" top="867" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IChatService</Name>
+        <Access>Public</Access>
+        <Location left="2974" top="697" />
+        <Size width="162" height="61" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Class">
+        <Name>PostService</Name>
+        <Access>Public</Access>
+        <Location left="1238" top="448" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>LikeService</Name>
+        <Access>Public</Access>
+        <Location left="786" top="765" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>ILikeService</Name>
+        <Access>Public</Access>
+        <Location left="786" top="546" />
+        <Size width="162" height="61" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Class">
+        <Name>Like</Name>
+        <Access>Public</Access>
+        <Location left="786" top="1007" />
+        <Size width="162" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Guid id</Member>
+        <Member type="Field">User likingUser</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PostReport</Name>
+        <Access>Public</Access>
+        <Location left="1423" top="806" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Post reportedPost</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserReport</Name>
+        <Access>Public</Access>
+        <Location left="2137" top="804" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">User reportedUser</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Report</Name>
+        <Access>Public</Access>
+        <Location left="1832" top="517" />
+        <Size width="178" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Guid id</Member>
+        <Member type="Field">User reporter</Member>
+        <Member type="Field">DateTime timeStampOfReport</Member>
+        <Member type="Field">bool reviewed</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ReportService</Name>
+        <Access>Public</Access>
+        <Location left="1832" top="377" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IPostService</Name>
+        <Access>Public</Access>
+        <Location left="1238" top="215" />
+        <Size width="162" height="61" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IReportService</Name>
+        <Access>Public</Access>
+        <Location left="1832" top="215" />
+        <Size width="162" height="61" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserService</Name>
+        <Access>Public</Access>
+        <Location left="2289" top="436" />
+        <Size width="478" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private List&lt;User&gt; users</Member>
+        <Member type="Field">private IUserRepository userRepository</Member>
+        <Member type="Constructor">public UserService()</Member>
+        <Member type="Constructor">public UserService(IUserRepository userRepository)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IUserService</Name>
+        <Access>Public</Access>
+        <Location left="2289" top="144" />
+        <Size width="477" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">List&lt;User&gt; GetAllUsers()</Member>
+        <Member type="Method">List&lt;User&gt; GetAllUsersOfUserRole(UserRole userRole)</Member>
+        <Member type="Method">User? GetUserById(Guid userId)</Member>
+        <Member type="Method">Result CreateUser(User newUser)</Member>
+        <Member type="Method">Result UpdateUser(User user)</Member>
+        <Member type="Method">Result DeleteUser(Guid userId)</Member>
+        <Member type="Method">List&lt;User&gt; SearchUserByFullNameAndUsername(string searchTerm, UserRole? userRole)</Member>
+        <Member type="Method">List&lt;User&gt; GetUsersByRoles(List&lt;UserRole&gt; roles)</Member>
+        <Member type="Method">Result ToggleUserBan(Guid userId, bool ban)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>User</Name>
+        <Access>Public</Access>
+        <Location left="2047" top="1087" />
+        <Size width="683" height="689" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid id</Member>
+        <Member type="Field">private string firstname</Member>
+        <Member type="Field">private string lastname</Member>
+        <Member type="Field">private string username</Member>
+        <Member type="Field">private string email</Member>
+        <Member type="Field">private byte[] passwordHash</Member>
+        <Member type="Field">private byte[] passwordSalt</Member>
+        <Member type="Field">private UserRole userRole</Member>
+        <Member type="Field">private bool deactivated</Member>
+        <Member type="Field">private bool ban</Member>
+        <Member type="Constructor">public User(string firstName, string lastName, string username, string email, string password, UserRole userRole)</Member>
+        <Member type="Constructor">public User(Guid id, string firstName, string lastName, string username, string email, byte[] passwordHash, byte[] password, bool ban)</Member>
+        <Member type="Property">public Guid Id { get; }</Member>
+        <Member type="Property">public string FirstName { get; }</Member>
+        <Member type="Property">public string LastName { get; }</Member>
+        <Member type="Property">public string UserName { get; }</Member>
+        <Member type="Property">public string Email { get; }</Member>
+        <Member type="Property">public byte[] PasswordHash { get; }</Member>
+        <Member type="Property">public byte[] PasswordSalt { get; }</Member>
+        <Member type="Property">public UserRole UserRole { get; }</Member>
+        <Member type="Property">public bool Deactivated { get; }</Member>
+        <Member type="Property">public int NewProperty { get; set; }</Member>
+        <Member type="Method">public Result ToggleBan()</Member>
+        <Member type="Method">public void UpdateUser(string username, string email, string password, string firstname, string lastname, UserRole userRole, bool ban, bool deactivated)</Member>
+        <Member type="Method">public void UpdateUser(string username, string email, string firstname, string lastname, UserRole userRole, bool ban, bool deactivated)</Member>
+        <Member type="Method">public void ChangePassword(string password)</Member>
+        <Member type="Method">public bool IsAdmin()</Member>
+        <Member type="Method">public Result BanUser()</Member>
+        <Member type="Method">public Result UnbanUser()</Member>
+        <Member type="Method">public string GetFullName()</Member>
+        <Member type="Method">public string GetFullNameWithUsername()</Member>
+        <Member type="Method">public string GetFullNameWithUsernameAndEmail()</Member>
+        <Member type="Method">private byte[] GenerateSalt()</Member>
+        <Member type="Method">private void SetPassword(string password)</Member>
+        <Member type="Method">public bool VerifyPassword(string password)</Member>
+        <Member type="Method">public Result ToggleUserBan(bool ban)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>UserRole</Name>
+        <Access>Public</Access>
+        <Location left="1820" top="1296" />
+        <Size width="163" height="112" />
+        <Collapsed>False</Collapsed>
+        <Value>Admin</Value>
+        <Value>Regular</Value>
+        <Value>Verified</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>NotificationUserBanned</Name>
+        <Access>Public</Access>
+        <Location left="2001" top="2409" />
+        <Size width="165" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NotificationMessageReceived</Name>
+        <Access>Public</Access>
+        <Location left="2297" top="2409" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Message message</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NotificationPostCommented</Name>
+        <Access>Public</Access>
+        <Location left="1618" top="2597" />
+        <Size width="191" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NotificationPostLiked</Name>
+        <Access>Public</Access>
+        <Location left="1380" top="2597" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NotificationReceivedMessageSoloConversation</Name>
+        <Access>Public</Access>
+        <Location left="2382" top="2580" />
+        <Size width="311" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Conversation conversation</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NotificationReceivedMessageGroupConversation</Name>
+        <Access>Public</Access>
+        <Location left="2007" top="2580" />
+        <Size width="322" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">GroupConverstaion groupConversation</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NotificationRestrictedPost</Name>
+        <Access>Public</Access>
+        <Location left="1757" top="2409" />
+        <Size width="180" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Post restrictedPost</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NotificationPostInteraction</Name>
+        <Access>Public</Access>
+        <Location left="1512" top="2409" />
+        <Size width="183" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">User interactor</Member>
+        <Member type="Field">Post interactedPost</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Notification</Name>
+        <Access>Public</Access>
+        <Location left="1775" top="2177" />
+        <Size width="162" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Guid id</Member>
+        <Member type="Field">User addressee</Member>
+        <Member type="Field">DateTime timeStamp</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Conversation</Name>
+        <Access>Public</Access>
+        <Location left="2974" top="1099" />
+        <Size width="162" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid id</Member>
+        <Member type="Field">private List&lt;User&gt; users</Member>
+        <Member type="Field">private List&lt;Message&gt; messages</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Result</Name>
+        <Access>Public</Access>
+        <Location left="1149" top="2177" />
+        <Size width="162" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly bool success</Member>
+        <Member type="Field">private readonly string message</Member>
+        <Member type="Property">public bool Success { get; }</Member>
+        <Member type="Property">public string Message { get; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PostContent</Name>
+        <Access>Public</Access>
+        <Location left="1103" top="1645" />
+        <Size width="482" height="213" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid id</Member>
+        <Member type="Field">private string content</Member>
+        <Member type="Field">private DateTime creationTime</Member>
+        <Member type="Constructor">public PostContent(string contentText, DateTime creationTime)</Member>
+        <Member type="Constructor">public PostContent(Guid id, string contentText, DateTime creationTime)</Member>
+        <Member type="Property">public Guid Id { get; }</Member>
+        <Member type="Property">public string ContentText { get; }</Member>
+        <Member type="Property">public DateTime CreationTime { get; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Post</Name>
+        <Access>Public</Access>
+        <Location left="1103" top="1087" />
+        <Size width="482" height="434" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid id</Member>
+        <Member type="Field">private User author</Member>
+        <Member type="Field">private List&lt;PostContent&gt; postContents</Member>
+        <Member type="Field">List&lt;Post&gt; comments</Member>
+        <Member type="Field">List&lt;Like&gt; likes</Member>
+        <Member type="Field">private bool restricted</Member>
+        <Member type="Field">private bool deleted</Member>
+        <Member type="Constructor">public Post(User author, string content)</Member>
+        <Member type="Constructor">public Post(Guid id, User author, List&lt;PostContent&gt; postContents, bool restricted, bool deleted)</Member>
+        <Member type="Property">public guid Id { get; }</Member>
+        <Member type="Property">public List&lt;PostConent&gt; PostContents { get; }</Member>
+        <Member type="Property">public User Author { get; }</Member>
+        <Member type="Property">public List&lt;Comment&gt; Comments { get; }</Member>
+        <Member type="Property">public bool Deleted { get; }</Member>
+        <Member type="Property">public bool Restricted { get; }</Member>
+        <Member type="Method">public bool EditPost(Guid editorId, string content)</Member>
+        <Member type="Method">public Result TogglePostRestriction(bool restriction)</Member>
+        <Member type="Method">public Result DeletePost(Guid authorId)</Member>
+        <Member type="Method">public Result AddComment(Post comment)</Member>
+        <Member type="Method">public bool IsLikedByUser(User user)</Member>
+        <Member type="Method">public Result ToggleLike(User likingUser)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Containers />
+    <Relationships>
+      <Relationship type="Generalization" first="0" second="27">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>3178</X>
+          <Y>1313</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>3062</X>
+          <Y>1289</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="0" second="1">
+        <Label>contains</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="2" second="27">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Realization" first="2" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="5" second="30">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>986</X>
+          <Y>807</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1205</X>
+          <Y>1062</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="5" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Realization" first="5" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="9" second="10">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="4" second="30">
+        <Label>manages</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Realization" first="4" second="12">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="11" second="13">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="11" second="10">
+        <Label>manages</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="30" second="16">
+        <Label>is created by</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1610</X>
+          <Y>1198</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="14" second="16">
+        <Label>manages</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Realization" first="14" second="15">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="30" second="7">
+        <Label>has</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="16" second="17">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2017</X>
+          <Y>1345</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="9" second="16">
+        <Label>reported user</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="30">
+        <Label>reported post</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="30" second="30">
+        <Label>has comments</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1613</X>
+          <Y>1246</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1450</X>
+          <Y>1550</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="30" second="29">
+        <Label>has</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1317</X>
+          <Y>1549</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <EndMultiplicity>1..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Generalization" first="21" second="25">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="27" second="16">
+        <Label>includes</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <EndMultiplicity>2</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="27" second="1">
+        <Label>contains</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Generalization" first="18" second="26">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="10">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="19" second="26">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="22" second="19">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="23" second="19">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="20" second="25">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="25" second="26">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="24" second="26">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.ClassDiagram" assembly="NClass.DiagramEditor, Version=2.8.0.1, Culture=neutral, PublicKeyToken=null">
+    <Name>LoginStrategy</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>ReportService</Name>
+        <Access>Public</Access>
+        <Location left="1494" top="126" />
+        <Size width="781" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public Result ReviewReport(IModerationStrategy moderationStrategy, ModerationReview moderationReview, ModerationRepositories moderationRepositories)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IModerationStrategy</Name>
+        <Access>Public</Access>
+        <Location left="1599" top="353" />
+        <Size width="572" height="78" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Result ReviewReport(ModerationReview moderationReview, ModerationRepositories moderationRepositories)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>PostModerationStrategy</Name>
+        <Access>Public</Access>
+        <Location left="1573" top="585" />
+        <Size width="167" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserModerationStrategy</Name>
+        <Access>Public</Access>
+        <Location left="2047" top="585" />
+        <Size width="167" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModerationReview</Name>
+        <Access>Public</Access>
+        <Location left="921" top="487" />
+        <Size width="300" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public ModerationReview(User banningAdmin, Guid reportId)</Member>
+        <Member type="Property">public User BanningAdmin { get; }</Member>
+        <Member type="Property">public Guid ReportId { get; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserModerationReview</Name>
+        <Access>Public</Access>
+        <Location left="1457" top="1211" />
+        <Size width="573" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UserModerationReview(User banningAdmin, Guid reportId, bool banAuthor, bool restrictAllPostsMadeByUser)</Member>
+        <Member type="Property">public bool BanAuthor { get; }</Member>
+        <Member type="Property">public bool RestrictAllPostsMadeByUser { get; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PostModerationReview</Name>
+        <Access>Public</Access>
+        <Location left="363" top="890" />
+        <Size width="660" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public PostModerationReview(User banningAdmin, Guid reportId, bool restrictPost, bool banAuthor, bool restrictAllPostsMadeByUser)</Member>
+        <Member type="Property">public bool RestrictPost { get; }</Member>
+        <Member type="Property">public bool BanAuthor { get; }</Member>
+        <Member type="Property">public bool RestrictAllPostsMadeByUser { get; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModerationRepositories</Name>
+        <Access>Public</Access>
+        <Location left="2850" top="424" />
+        <Size width="326" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">internal readonly IReportRepository _reportRepository</Member>
+        <Member type="Constructor">public ModerationRepositories(IReportRepository reportRepository)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PostModerationRepositories</Name>
+        <Access>Public</Access>
+        <Location left="1932" top="980" />
+        <Size width="900" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">internal readonly IUserRepository _userRepository</Member>
+        <Member type="Field">internal readonly IPostRepository _postRepository</Member>
+        <Member type="Field">internal readonly INotificationRepository _notificationRepository</Member>
+        <Member type="Constructor">public PostModerationRepositories(IReportRepository reportRepository, IUserRepository userRepository, IPostRepository postRepository, INotificationRepository notificationRepository)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserModerationRepositories</Name>
+        <Access>Public</Access>
+        <Location left="3035" top="965" />
+        <Size width="900" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">internal readonly IUserRepository _userRepository</Member>
+        <Member type="Field">internal readonly IPostRepository _postRepository</Member>
+        <Member type="Field">internal readonly INotificationRepository _notificationRepository</Member>
+        <Member type="Constructor">public UserModerationRepositories(IReportRepository reportRepository, IUserRepository userRepository, IPostRepository postRepository, INotificationRepository notificationRepository)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Containers />
+    <Relationships>
+      <Relationship type="Association" first="0" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Realization" first="2" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="3" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="5" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="6" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>804</X>
+          <Y>551</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="9" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="1" second="4">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1546</X>
+          <Y>396</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="1" second="7">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2240</X>
+          <Y>393</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="6">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1076</X>
+          <Y>979</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1774</X>
+          <Y>628</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2026</X>
+          <Y>955</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="3" second="9">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>3131</X>
+          <Y>940</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="3" second="5">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2078</X>
+          <Y>687</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1838</X>
+          <Y>1186</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

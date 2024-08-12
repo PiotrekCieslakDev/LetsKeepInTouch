@@ -1,0 +1,78 @@
+﻿@page
+@model WebApp.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<section class="vh-60">
+    <div class="mask d-flex align-items-center h-60 gradient-custom-3">
+        <div class="container h-60">
+            <div class="row d-flex justify-content-center align-items-center h-60">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-center mb-5">Create an account</h2>
+
+                            <form method="post">
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="_newUser.FirstName">Firstname:*</label><br />
+                                    <input class="form-control" type="text" asp-for="_newUser.FirstName" />
+                                    <span asp-validation-for="_newUser.FirstName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="_newUser.LastName">Lastname:*</label><br />
+                                    <input class="form-control" type="text" asp-for="_newUser.LastName" />
+                                    <span asp-validation-for="_newUser.LastName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="_newUser.UserName">Username:*</label><br />
+                                    <input class="form-control" type="text" asp-for="_newUser.UserName" />
+                                    <span asp-validation-for="_newUser.UserName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="_newUser.Email">Email:*</label><br />
+                                    <input class="form-control" type="text" asp-for="_newUser.Email" />
+                                    <span asp-validation-for="_newUser.Email" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="_newUser.Password">Password:*</label><br />
+                                    <input class="form-control" type="password" asp-for="_newUser.Password" />
+                                    <span asp-validation-for="_newUser.Password" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="_newUser.ConfirmPassword">Repeat password:*</label><br />
+                                    <input class="form-control" type="password" asp-for="_newUser.ConfirmPassword" />
+                                    <span asp-validation-for="_newUser.ConfirmPassword" class="text-danger"></span>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Sign up</button>
+                                </div>
+
+                                <p class="text-center text-muted mt-5 mb-0">
+                                    Have already an account?
+                                    <a asp-page="/Login" class="fw-bold text-body"><u>Login here</u></a>
+                                </p>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+{
+    <script>
+        window.alert('@TempData["ErrorMessage"]');
+    </script>
+}

@@ -1,0 +1,60 @@
+﻿@page
+@model WebApp.Pages.BrowseUsersModel
+@{
+    ViewData["Title"] = "Browse Users";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="get">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search" name="SearchTerm" value="@Model.SearchTerm">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                        @if (!string.IsNullOrEmpty(Model.SearchTerm))
+                        {
+                            <a asp-page="/BrowseUsers" class="btn btn-secondary">Clear</a>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="list-group">
+        @foreach (var client in Model._Users)
+        {
+            <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                @client.GetFullNameWithUserNameAndEmail()
+
+                <div>
+                    <a asp-page="/UserProfile" asp-route-id="@client.Id" class="btn btn-primary btn-sm">See user's profile</a>
+                </div>
+            </button>
+        }
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (Model.PageNumber > 1)
+                {
+                    <li class="page-item"><a class="page-link" asp-page-handler="OnGet" asp-route-pageNumber="1">First</a></li>
+                    <li class="page-item"><a class="page-link" asp-page-handler="OnGet" asp-route-pageNumber="@(Model.PageNumber - 1)">Previous</a></li>
+                }
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(Model.PageNumber == i ? "active" : "")"><a class="page-link" asp-page-handler="OnGet" asp-route-pageNumber="@i">@i</a></li>
+                }
+                @if (Model.PageNumber < Model.TotalPages)
+                {
+                    <li class="page-item"><a class="page-link" asp-page-handler="OnGet" asp-route-pageNumber="@(Model.PageNumber + 1)">Next</a></li>
+                    <li class="page-item"><a class="page-link" asp-page-handler="OnGet" asp-route-pageNumber="@Model.TotalPages">Last</a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+

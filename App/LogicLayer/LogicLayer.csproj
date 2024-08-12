@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayerInterfaces\DataAccessLayerInterfaces.csproj" />
+    <ProjectReference Include="..\Database\Database.csproj" />
+    <ProjectReference Include="..\Domains\Domains.csproj" />
+    <ProjectReference Include="..\Enums\Enums.csproj" />
+    <ProjectReference Include="..\LogicLayerInterfaces\LogicLayerInterfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UserStrategies\UserFinders\" />
+  </ItemGroup>
+
+</Project>

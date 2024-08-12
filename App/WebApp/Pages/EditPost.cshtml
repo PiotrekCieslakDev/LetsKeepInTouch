@@ -1,0 +1,99 @@
+﻿@page
+@model WebApp.Pages.EditPostModel
+@{
+    ViewData["Title"] = "Update post";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="text-muted">
+                        <a asp-page="/ClientsProfile" asp-route-id="@Model._ChosenPost.Author.Id">@Model._ChosenPost.Author.GetFullNameWithUserName()</a>
+                    </h6>
+                </div>
+                <p class="card-text">
+                    This user is @Model._ChosenPost.Author.UserRole user
+                </p>
+
+                @foreach (var postContent in Model._ChosenPost.PostContents)
+                {
+                    <hr />
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6>
+                        </h6>
+                        <h6>
+                            @postContent.CreationTime
+                        </h6>
+                    </div>
+                    <h5 class="card-title">
+                        @postContent.ContentText
+                    </h5>
+                }
+                <br />
+            </div>
+        </div>
+        <form method="post" asp-page-handler="OnPost" asp-route-id="@Model._ChosenPost.Id">
+            <div class="form-group">
+                <input type="hidden" asp-for="@Model._ChosenPost.Id" value="@Model._ChosenPost.Id" />
+            </div>
+            <div class="form-group">
+                <label asp-for="_PostContentDTO.Content">Text<small>*</small></label>
+                <textarea asp-for="_PostContentDTO.Content" rows="5" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <p><span class="require">*</span> - required fields</p>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a asp-page="/Index" class="btn btn-default">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+
+       @*  @if (Model._ChosenMainPost != null)
+        {
+            <div class="col-md-8 col-md-offset-2">
+                <h1>Create post</h1>
+                <form method="post" asp-page-handler="OnPost" asp-route-id="@Model._ChosenMainPost.Id">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="@Model._ChosenMainPost.Id" value="@Model._ChosenMainPost.Id" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="_PostContentDTO.Content">Text<small>*</small></label>
+                        <textarea asp-for="_PostContentDTO.Content" rows="5" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <p><span class="require">*</span> - required fields</p>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a asp-page="/Index" class="btn btn-default">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        }
+        else if (@Model._ChosenComment != null)
+        {
+            <div class="card mb-4 shadow-sm" style="max-width: 80%; margin-left: auto; margin-right: auto;">
+                <div class="card-body">
+                    <h5>Add a Comment</h5>
+                    <hr>
+                    <form method="post" asp-page-handler="AddComment">
+                        <input type="hidden" asp-for="@Model._ChosenComment" />
+
+                        <div class="form-group">
+                            <textarea class="form-control" asp-for="@Model._PostContentDTO.Content" rows="3" placeholder="@Model._PostContentDTO.Content"></textarea>
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </div>
+        } *@
+
+    </div>
+</div>
