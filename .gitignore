@@ -1,0 +1,67 @@
+## Windows ##
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Visual Studio 2019 ##
+.vscode/
+.vs2019/
+bin/
+obj/
+Backup*/
+UpgradeLog*.htm
+UpgradeLog*.log
+UpgradeLog*.XML
+[Tt]est[Rr]esult*
+[Bb]in
+[Oo]bj
+
+## Windows Forms specific ##
+bin/
+obj/
+*.exe
+*.pdb
+*.user
+
+## ASP.NET Razor Pages specific ##
+bin/
+obj/
+*.exe
+*.pdb
+*.user
+appsettings.Development.json
+appsettings.local.json
+
+# Ignore NuGet packages
+packages/
+
+# Ignore the Visual Studio Code workspace file
+.vscode/settings.json
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+*.cache
+*.dll
+*.exe
+*.pdb
+/build/
+*.suo
+*.user
+_ReSharper.*/
+*.sdf
+*.opensdf
+*.tlog
+*.log
+
+*.dtbcache.v2
+*.vsdix
+*.bin
+*.metadata.v7.bin
+*.project.v7.bin
+.vs/
